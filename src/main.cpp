@@ -4,10 +4,13 @@
 #include <string>
 #include "json.hpp"
 #include "PID.h"
+#include <fstream> // For output a file
 
 // for convenience
 using nlohmann::json;
 using std::string;
+using namespace std; 
+
 
 // For converting back and forth between radians and degrees.
 constexpr double pi() { return M_PI; }
@@ -30,13 +33,17 @@ string hasData(string s) {
   return "";
 }
 
+void outputData(double cte,double speed,double angle, double steer_value);
+
 int main() {
   uWS::Hub h;
-
+  ofstream outfile;
   PID pid;
   /**
    * TODO: Initialize the pid variable.
    */
+
+  pid.Init(0.2,0,3);
 
   h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, 
                      uWS::OpCode opCode) {
@@ -56,23 +63,34 @@ int main() {
           double cte = std::stod(j[1]["cte"].get<string>());
           double speed = std::stod(j[1]["speed"].get<string>());
           double angle = std::stod(j[1]["steering_angle"].get<string>());
+          double power = std::stod(j[1]["throttle"].get<string>());
           double steer_value;
+
+          //std::cout << "cte is " << cte << std::endl;
+          //std::cout << "speed is " << speed << std::endl;
+          //std::cout << "steering_angle is " << angle << std::endl;
+          //std::cout << "throttle is " << power << std::endl;
+           
           /**
            * TODO: Calculate steering value here, remember the steering value is
            *   [-1, 1].
            * NOTE: Feel free to play around with the throttle and speed.
            *   Maybe use another PID controller to control the speed!
            */
-          
-          // DEBUG
-          std::cout << "CTE: " << cte << " Steering Value: " << steer_value 
-                    << std::endl;
 
+
+          pid.UpdateError(cte);
+          steer_value =  - pid.TotalError(); 
+
+                    // DEBUG
+          //std::cout << "CTE: " << cte << " Steering Value: " << steer_value 
+          //          << std::endl;
+          outputData(cte, speed, angle, steer_value);
           json msgJson;
           msgJson["steering_angle"] = steer_value;
           msgJson["throttle"] = 0.3;
           auto msg = "42[\"steer\"," + msgJson.dump() + "]";
-          std::cout << msg << std::endl;
+          //std::cout << msg << std::endl;
           ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
         }  // end "telemetry" if
       } else {
@@ -102,4 +120,12 @@ int main() {
   }
   
   h.run();
+}
+
+void outputData(double cte,double speed,double angle, double steer_value)
+{
+   ofstream outputFile;
+   outputFile.open("output.txt",ios_base::app);
+   outputFile << cte << "\t" << speed << "\t" << angle << "\t" << steer_value << endl;
+   outputFile.close();
 }
