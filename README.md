@@ -6,6 +6,7 @@ Self-Driving Car Engineer Nanodegree Program
 [//]: # (Image References)
 
 [image1]: ./images/throttle_DOE.png "throttle DOE" 
+[image10]: ./images/Kp_DOE0.png "Kp DOE0" 
 [image2]: ./images/Kp_DOE.png "Kp DOE" 
 [image3]: ./images/Kp_DOE2.png "Kp DOE CTE" 
 [image4]: ./images/Kp_DOE3.png "Kp DOE steering angle" 
@@ -80,7 +81,7 @@ First, I would like to know how throttle plays in the role. So I blindly set (Kp
 
 Now I would like to focus on the default setting of the throttle = 0.3. I run the Kp from 1, 0.5, 0.1. Data is shown below. The lower the Kp, the less of overshooting oscillations. So I set Kp =0.1 for the next test. 
 
-![alt text][image2]
+![alt text][image10]
 
 Next step, I would like to play Kd, the differentiae term. I range Kd from 0 to 3. Data is shown below. The high the Kd, the less of overshooting oscillations.
 
@@ -88,7 +89,8 @@ Next step, I would like to play Kd, the differentiae term. I range Kd from 0 to 
 
 Later I found Kd= 0.4 is good when Kp=0.1 and Ki=0. But then I encountered the tires off track in the "cornering" cases. I captured the snapshot of these two cases.  
 
-![alt text][image7][image8]
+![alt text][image7]
+![alt text][image8]
 
 
 After some tuning, I found that I need to increase the Kp again. Large Kp will give a quick response. 
