@@ -95,9 +95,9 @@ Later I found Kd= 4 is good when Kp=0.1 and Ki=0. However, I encountered the tir
 After some thinking, I found that I need to increase the Kp again. Large Kp will give a quick response. 
 
 ![alt text][image2]
-below is the CTE comparison
+Below plot is the CTE x10 comparison:
 ![alt text][image3]
-below is the steering_angle comparison
+Below plot is the steering_angle comparison:
 ![alt text][image4]
 
 After all trials, I decided on my hyperparameter as (Kp, Ki, Kd) = (0.2, 0, 4). 
