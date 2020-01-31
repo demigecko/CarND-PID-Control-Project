@@ -95,16 +95,17 @@ Later I found Kd= 4 is good when Kp=0.1 and Ki=0. However, I encountered the tir
 After some thinking, I found that I need to increase the Kp again. Large Kp will give a quick response. 
 
 ![alt text][image2]
+below is the CTE comparison
 ![alt text][image3]
+below is the steering_angle comparison
 ![alt text][image4]
 
-Later, I found if I would like to have the car to be responsive,  I have to increase the Kp a bit. Therefore, I decide on my hyperparameter as (Kp, Ki, Kd) = (0.2, 0, 4). 
+After all trials, I decided on my hyperparameter as (Kp, Ki, Kd) = (0.2, 0, 4). 
 
+How about Ki? should I turn it? Well, in theory, if the system doesn't have any biases, I shouldn't need to. I believe it is in our case based on the CTE plot above. Turing up the Ki, can make the error and oscillation worse. It is what I expected from Sabastrain's lecture. He mentioned that "This may not seem all that impressive. PID seems to do worse than the PD controller! The purpose of the I term is to compensate for biases, and the current robot has no bias." 
 
-How about Ki? should I turn it? Well, in theory, if the system doesn't have any biases, I shouldn't need to. I believe it is in our case. Turing up the Ki, can make the error and oscillation worse. It is what I expected from Sabastrain's lecture. He mentioned that "This may not seem all that impressive. PID seems to do worse than the PD controller! The purpose of the I term is to compensate for biases, and the current robot has no bias." 
-
+I still made a comparison case of Ki. 
 ![alt text][image6] 
-
 
 so my final parameter is (Kp, Ki, Kd ) = (0.2, 0, 4) in the throttle = 0.3. It can run very smoothly without noticeable oscillations. 
 
