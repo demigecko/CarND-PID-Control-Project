@@ -78,7 +78,7 @@ First, I would like to know how throttle plays in the role. So I blindly set (Kp
 
 ![alt text][image1]
 
-Now I would like to focus on the default setting of the throttle = 0.3. I run the Kp from 1, 0.5, 0.1. Data shown in the following image. The lower the Kp, the less of overshooting oscillations. So I set Kp =0.1 for the next test. 
+Now I would like to focus on the default setting of the throttle = 0.3. I run the Kp from 1, 0.5, 0.1. Data is shown below. The lower the Kp, the less of overshooting oscillations. So I set Kp =0.1 for the next test. 
 
 ![alt text][image2]
 
