@@ -74,7 +74,7 @@ void outputData(double cte,double speed,double angle, double steer_value)
 IV. Parameter Optimation
 ----------
 
-First, I would like to know how throttle plays in the role. So I blindly set (Kp, Ki, Kd) = (1, 0, 0) and range the throttle from 0.3 to 0.1. I realized that throttle determines the max of the saturation speed. As you can see, at the same Kp, the lower the throttle, the later the oscillation shows up. It is up to the speed of the car in the simulator.  
+First, I would like to know how throttle plays in the role. So I blindly set (Kp, Ki, Kd) = (1, 0, 0) and range the throttle from 0.3 to 0.1. I realized that throttle determines the max of the saturation speed. As you can see, at the same Kp, the lower the throttle, the later the oscillation shows up. It is up to the speed of the car in the simulator.  In other words, (Kp, Ki, Kd ) = (1,0,0) is suitable parameters for the throttle of 0.1, but this will be too easy. Let me deal with the case of throttle = 0.3 as default. 
 
 ![alt text][image1]
 
@@ -109,4 +109,4 @@ so my final parameter is (Kp, Ki, Kd ) = (0.2, 0, 4) in the throttle = 0.3. It c
 
 V. Summary
 ----------
-My code can pass all the criteria in the case of throttle = 0.3. When the throttle is higher, the car's speed can go higher; the hyperparameter of the PID controller will be different. Therefore, my next step is to improve the code by considering the speed and throttle into PID controller and make this program robust on speed.  
+My code can pass all the criteria in the case of throttle = 0.3. When the throttle is higher, the car's speed can go higher; the hyperparameter of the PID controller will be different. Therefore, my next step is to improve the code by considering the speed and throttle into the PID controller and make this program robust on speed.  
